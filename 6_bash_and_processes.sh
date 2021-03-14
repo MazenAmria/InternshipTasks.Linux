@@ -1,2 +1,13 @@
-sleep 10m
-kill -s 9 `ps -aux | grep 6_bash_and_processes.sh | awk '{ print $2 }'`
+#!/bin/bash
+
+# Run the sleep command for 10 mins in background
+sleep 10m &
+
+# extract the process info
+process=$(ps -aux | grep -w 'sleep')
+
+# extract the pid
+pid=$(echo $process | awk '{ print $2 }')
+
+# kill the process with SIGKILL
+kill -s 9 $pid

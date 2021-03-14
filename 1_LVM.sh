@@ -16,7 +16,7 @@ mnt_dest="/mnt/data"
 mkdir -p $(mnt_dest)
 
 # extract the uuid of the logical volume
-uuid=$(blkid | grep lvol | cut -d" " -f2)
+uuid=$(blkid | grep -w lvol | cut -d" " -f2)
 
 # write it to /etc/fstab
 # <file system>	<mount point>	<type>	<options>	<dump>	<pass>

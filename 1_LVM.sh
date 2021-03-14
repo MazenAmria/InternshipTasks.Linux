@@ -20,4 +20,5 @@ uuid=$(blkid | grep lvol | cut -d" " -f2)
 
 # write it to /etc/fstab
 # <file system>	<mount point>	<type>	<options>	<dump>	<pass>
-printf '%s\t%s\text4\tdefaults\t0\t0\n' $uuid $mnt_dest >> /etc/fstab
+# $uuid			$mnt_dest		ext4	defaults	0		2
+printf '%s\t%s\text4\tdefaults\t0\t2\n' $uuid $mnt_dest >> /etc/fstab

@@ -6,7 +6,7 @@ temp_file=~/temp.$(date "+%Y.%m.%d-%H.%M.%S")
 crontab -l > $temp_file
 
 # append the job to the temp file
-echo "30 1 * * * ~/logged_in_users.sh" >> $temp_file
+echo "30 1 * * * echo $(date) - $(who | awk 'BEGIN { ORS = " " } { print $1 }') >> ~/logfile" >> $temp_file
 
 # reload the crontab form the edited temp file
 crontab $temp_file

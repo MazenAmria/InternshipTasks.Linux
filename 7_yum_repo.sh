@@ -8,7 +8,7 @@ yum install -y httpd mysql
 
 # download the repo packages
 yum install -y wget
-wget -r --no-parent --mirror https://repo.zabbix.com/zabbix/4.4/rhel/7/x86_64 -P /var/www/html
+wget -N -r --no-parent --mirror https://repo.zabbix.com/zabbix/4.4/rhel/7/x86_64 -P /var/www/html
 
 # create the repo
 yum install -y yum-utils createrepo
@@ -18,7 +18,7 @@ createrepo --update /var/www/html/repo.zabbix.com
 yum-config-manager --add-repo http://localhost/repo.zabbix.com
 
 # download GPG key to /etc/pki/rpm-gpg
-wget https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX -P /etc/pki/rpm-gpg/
+wget -N https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX -P /etc/pki/rpm-gpg/
 
 # enable GPG checking for the repo
 repo=/etc/yum.repos.d/localhost_repo.zabbix.com.repo

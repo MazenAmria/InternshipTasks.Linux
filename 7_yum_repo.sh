@@ -17,6 +17,16 @@ createrepo --update /var/www/html/repo.zabbix.com
 # add the repo (and enable it)
 yum-config-manager --add-repo http://localhost/repo.zabbix.com
 
+# download GPG key to /etc/pki/rpm-gpg
+wget https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX -P /etc/pki/rpm-gpg/
+
+# enable GPG checking for the repo
+repo=/etc/yum.repos.d/localhost_repo.zabbix.com.repo
+sed -i "/^gpgcheck=.*$/d" $repo
+echo "gpgcheck=1" >> $repo
+sed -i "/^gpgkey=.*$/d" $repo
+echo "gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX" >> $repo
+
 # the repo config files are stored ad /etc/yum.repos.d/
 # for any repo you can disable it by setting enabled=0
 # alternativly you can use yum-config-manager --disable <repo>

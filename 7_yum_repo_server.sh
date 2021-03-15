@@ -7,10 +7,7 @@ yum install -y tmux
 yum install -y httpd mysql
 
 # start httpd to share the repo locally
-systemctl start http
-
-# import the GPG key for Zabbix repo
-rpm --import https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591
+systemctl start httpd
 
 # install Zabbix release to create the repo
 rpm -Uv https://repo.zabbix.com/zabbix/4.4/rhel/7/x86_64/zabbix-release-4.4-1.el7.noarch.rpm
@@ -20,6 +17,9 @@ rpm -Uv https://repo.zabbix.com/zabbix/4.4/rhel/7/x86_64/zabbix-release-4.4-1.el
 # zabbix-non-supported/x86_64     Zabbix Official Repository non-supported - x86_64
 
 mkdir -p /var/www/html/repos/{zabbix,zabbix-non-supported}
+
+# import the GPG key
+curl https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591 > /var/www/html/RPM-GPG-KEY-ZABBIX-A14FE591
 
 # fetch the repo to the local server using reposync
 reposync \
@@ -37,5 +37,5 @@ reposync \
         --download_path=/var/www/html/repos/
 
 # create the repo
-yum install -y yum-utils createrepo
+yum install -y createrepo
 createrepo /var/www/html/

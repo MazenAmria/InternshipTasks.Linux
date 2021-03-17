@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # add the repo (and enable it)
-yum-config-manager --add-repo http://192.168.56.4/
+yum install -y yum-utils
+yum-config-manager --add-repo http://192.168.56.5/
 
 # cleaning the cache
 yum clean all
@@ -11,4 +12,4 @@ yum clean all
 # alternativly you can use yum-config-manager --disable <repo>
 
 # installing the following packages from the local repo
-yum install -y zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-java-gateway
+yum install -y --nogpgcheck zabbix-server-mysql zabbix-web-mysql zabbix-agent zabbix-java-gateway

@@ -3,13 +3,6 @@
 # add the repo (and enable it)
 yum-config-manager --add-repo http://192.168.56.4/
 
-# enable the GPG checking for the repo
-repo=/etc/yum.repos.d/192.168.56.4_.repo
-sed -i "/^gpgkey=.*$/d" $repo
-echo "gpgkey=http://192.168.56.4/RPM-GPG-KEY-ZABBIX-A14FE591" >> $repo
-sed -i "/^gpgcheck=.*$/d" $repo
-echo "gpgcheck=1" >> $repo
-
 # cleaning the cache
 yum clean all
 

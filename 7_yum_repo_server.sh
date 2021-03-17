@@ -10,8 +10,11 @@ yum install -y httpd mysql
 systemctl start httpd
 
 # import GPG key
-curl https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591 > ~/RPM-GPG-KEY-ZABBIX-A14FE591
-rpm --import ~/RPM-GPG-KEY-ZABBIX-A14FE591
+curl -O https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX
+curl -O https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-79EA5ED4
+curl -O https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591
+curl -O https://repo.zabbix.com/RPM-GPG-KEY-ZABBIX-A14FE591-EL5
+rpm --import RPM-GPG-KEY-ZABBIX*
 
 # install Zabbix release to create the repo
 rpm -Uv https://repo.zabbix.com/zabbix/4.4/rhel/7/x86_64/zabbix-release-4.4-1.el7.noarch.rpm
